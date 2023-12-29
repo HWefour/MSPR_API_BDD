@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/h.efnane/Desktop/MSPR_API_BDD/Database/MSPR_BDD.sqlite3" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1910"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,7:mainANNONCE"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE BOTANISTE(
+   idBotaniste INTEGER,
+   siretBotaniste INTEGER NOT NULL,
+   nomEntrepriseBotaniste TEXT,
+   numEntrepriseBotaniste INTEGER,
+   PRIMARY KEY(idBotaniste)
+);
+
+CREATE TABLE ANNONCE(
+   idAnnonce INTEGER,
+   titreAnnonce TEXT,
+   statutAnnonce TEXT,
+   dateDebutGardeAnnonce NUMERIC NOT NULL,
+   dateFinGardeAnnonce NUMERIC NOT NULL,
+   texteAnnonce TEXT,
+   PRIMARY KEY(idAnnonce)
+);
+
+CREATE TABLE BLOBS(
+   idBlobs INTEGER,
+   image BLOB NOT NULL,
+   PRIMARY KEY(idBlobs)
+);
+
+CREATE TABLE USERS(
+   idUsers INTEGER,
+   nomUsers TEXT,
+   prenomUsers TEXT,
+   emailUsers TEXT,
+   mdpUsers TEXT,
+   bioUsers TEXT,
+   villeUsers TEXT,
+   cpUsers INTEGER,
+   roleUsers INTEGER,
+   idBotaniste INTEGER NOT NULL,
+   PRIMARY KEY(idUsers),
+   UNIQUE(idBotaniste),
+   FOREIGN KEY(idBotaniste) REFERENCES BOTANISTE(idBotaniste)
+);
+
+CREATE TABLE PHOTO(
+   idPhoto INTEGER,
+   formatPhoto TEXT,
+   metaPhoto TEXT,
+   descritptionPhoto TEXT,
+   datePublicationPhoto NUMERIC,
+   originePhoto TEXT,
+   urlPhoto TEXT,
+   idBlobs INTEGER NOT NULL,
+   PRIMARY KEY(idPhoto),
+   UNIQUE(idBlobs),
+   FOREIGN KEY(idBlobs) REFERENCES BLOBS(idBlobs)
+);
+
+CREATE TABLE COMMENTAIRES(
+   idCommentaire INTEGER,
+   texteCommentaire TEXT,
+   idUsers INTEGER NOT NULL,
+   idUsers_1 INTEGER NOT NULL,
+   PRIMARY KEY(idCommentaire),
+   FOREIGN KEY(idUsers) REFERENCES USERS(idUsers),
+   FOREIGN KEY(idUsers_1) REFERENCES USERS(idUsers)
+);
+
+CREATE TABLE contenir(
+   idAnnonce INTEGER,
+   idPhoto INTEGER,
+   PRIMARY KEY(idAnnonce, idPhoto),
+   FOREIGN KEY(idAnnonce) REFERENCES ANNONCE(idAnnonce),
+   FOREIGN KEY(idPhoto) REFERENCES PHOTO(idPhoto)
+);
+
+CREATE TABLE publier(
+   idAnnonce INTEGER,
+   status INTEGER NOT NULL,
+   dateDebutPubblication NUMERIC,
+   dateFinPublication NUMERIC,
+   idUsers INTEGER NOT NULL,
+   PRIMARY KEY(idAnnonce),
+   FOREIGN KEY(idAnnonce) REFERENCES ANNONCE(idAnnonce),
+   FOREIGN KEY(idUsers) REFERENCES USERS(idUsers)
+);
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
