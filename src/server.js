@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const usersRoute = require("../src/Routes/usersRoutes");
 const botanisteRoute = require("../src/Routes/botanisteRoutes");
 const annonceRoute = require("../src/Routes/annonceRoutes");
+const publicationRoute = require("../src/Routes/publicationRoute");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 app.use("/users", usersRoute);
 app.use("/botaniste", botanisteRoute);
 app.use("/annonce" , annonceRoute);
+app.use("/publication" , publicationRoute);
 
 
 // TESTING THE SERVER
