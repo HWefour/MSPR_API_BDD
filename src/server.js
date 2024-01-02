@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const usersRoute = require("../src/Routes/usersRoutes");
 const botanisteRoute = require("../src/Routes/botanisteRoutes");
+const annonceRoute = require("../src/Routes/annonceRoutes");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -10,6 +11,7 @@ app.use(bodyParser.json());
 // USERS ROUTES
 app.use("/users", usersRoute);
 app.use("/botaniste", botanisteRoute);
+app.use("/annonce" , annonceRoute);
 
 
 // TESTING THE SERVER
