@@ -18,6 +18,7 @@ exports.getAllBotaniste = async (req, res) => {
 };
 
 exports.getBotanisteById = async (req, res) => {
+  console.log("botaniste by id");
   const id = req.params.id;
   try {
     const botaniste = await getBotanisteById(id);
